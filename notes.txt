@@ -1,0 +1,39 @@
+tsc command:
+- tsc app.ts 			  // compile app.ts into app.js
+- tsc app.ts -w			// auto compile app.ts into app.js everytime app.ts is changed
+- tsc init			    // initialize the current wordir as typescript project
+- tsc 				      // compile all ts file inside the typescript project directory (only applicable after tsc --init)
+- tsc -w 				    // auto compile all ts file inside the typescript project directory (only applicable after tsc --init) everytime ts file is changed
+
+
+tsconfig.json options:
+- "exclude" : to exclude some ts file from compiling with 'tsc' or 'tsc -w' command. 
+  By default WITHOUT this 'exclude' option being defined, the node_modules is already excluded from tsc compile, but if you defined this 'exclude' options, you have to add the node_modules manually.
+  Ex:
+    "exclude":[
+        "node_modules",
+        "somefile.dev.ts",
+        "**/*.dev.ts",      // can also use wild card
+    ]
+
+- "include" : the opposite of exclude.
+  By default WITHOUT this 'include' option being defined, EVERYTHING is included, but if you defined this 'include' options, you have to add the ts files manually. 
+  Ex:
+    "include":[
+        "app.ts",
+        "lib.ts",
+    ]
+
+- "files" : same with include, but you cant specify folders with 'files' option
+
+- "compilerOptions":
+  "target"          : string,       Specify ECMAScript target version.
+  "lib"             : [],           Specify library files to be included in the compilation. By defualt, the library included follows the specified target compilation.
+  "allowJs"         : booelan,      Allow javascript files to be compiled.
+  "checkJs"         : booelan,      Report errors in .js files.
+  "sourceMap"       : boolean,      Generates corresponding '.map' file. To show ts files in the chrome dev tools Sources Tab, you need this map file.
+  "outDir"          : string,       Redirect output structure to the directory. The folder structure will the origin location of each input file in the --rootDir.
+  "rootDir"         : string,       Specify the root directory of input files. Use to control the output directory structure with --outDir. By default, the rootDir is src folder ONLY IF all the input file is in the src folder, otherwise the default will be on where the tsc init command excecuted.
+  "removeComments"  : boolean,      Do not emit comments to output.
+  "noEmit"          : boolean,      Do not emit outputs.
+  "noEmitOnError"   : boolean,      Do not emit outputs when there is a compilation error.
